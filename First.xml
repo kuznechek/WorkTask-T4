@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<file>
+  <element tag="library">System</element>
+  <element tag="library">System.IO</element>
+  <element tag="script">double ???x???;</element>
+  <element tag="script">{ get };</element>
+</file>
