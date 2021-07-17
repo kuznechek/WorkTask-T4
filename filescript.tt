@@ -1,0 +1,94 @@
+﻿<#@ template language="C#v3.5" debug="True" #>
+<#@ output extension="cs" #>  
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#
+    List<List<string>> XML1 = get_xml("First.xml");
+    List<List<string>> XML2 = get_xml("Second.xml");
+    foreach (string library1 in needed_elements("library", XML1))
+    {
+#>
+using <#= library1#>;
+<#
+    } 
+    foreach (string library2 in needed_elements("library", XML2))
+    {
+#>
+using <#= library2#>;
+<#
+    }
+    string name = needed_element("namespace", XML2);
+#>
+namespace <#= name#>
+{
+<#
+    string access = needed_element("access", XML2);
+    string classname = needed_element("classname", XML2);
+#>
+    <#= access#> class <#= classname#>
+    {
+<#
+    foreach (string litera in needed_elements("litera", XML2))
+    {
+        foreach (string script in needed_elements("script", XML1))
+        {
+            string newscript = "";
+            if (script.Contains("???x???"))
+            {
+                newscript = script.Replace("???x???", litera);
+            }
+            else
+            {
+                newscript = "// " + script;
+            }
+#>
+          <#= newscript#>
+<#        
+        }
+#>
+
+<#
+    }
+#>
+    }
+}
+<#+
+    static List<List<string>> get_xml(string title)
+    {
+        List<List<string>> result = new List<List<string>>();
+        XmlDocument doc = new XmlDocument();
+        string absolutepath = Path.GetFullPath(title);
+        doc.Load(absolutepath);
+        foreach (XmlNode node in doc.SelectNodes("/file/element"))
+        {
+            List<string> node_content = new List<string>() { node.Attributes[0].Value, node.InnerText };
+            result.Add(node_content);
+        }
+        return result;
+    }
+
+    static List<string> needed_elements(string key, List<List<string>> nodes)
+    {
+        List<string> result = new List<string>();
+        foreach (List<string> node in nodes)
+        {
+            if (node[0] == key)
+                result.Add(node[1]);
+        }
+        return result;
+    }
+
+    static string needed_element(string key, List<List<string>> nodes)
+    {
+        string result = "";
+        foreach (List<string> node in nodes)
+        {
+            if (node[0] == key)
+                result = node[1];
+        }
+        return result;
+    }
+#>
