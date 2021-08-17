@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<file>
+<element tag="namespace">first.cool.name</element>
+<element tag="classname">firstCoolClass</element>
+<element tag="access">internal</element>  
+<element tag="litera">one</element>
+<element tag="litera">two</element>
+<element tag="litera">three</element>
+</file>

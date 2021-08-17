@@ -2,6 +2,8 @@
 <file>
   <element tag="library">System</element>
   <element tag="library">System.IO</element>
-  <element tag="script">double ???x???;</element>
-  <element tag="script">{ get };</element>
+  <element tag="secondfile">Second_1.xml</element>
+  <element tag="secondfile">Second_2.xml</element>
+  <element tag="script" id="1">double ???x???;</element>
+  <element tag="script" id="2">{ get };</element>
 </file>

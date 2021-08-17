@@ -7,54 +7,54 @@
 <#@ import namespace="System.IO" #>
 <#
     List<List<string>> XML1 = get_xml("First.xml");
-    List<List<string>> XML2 = get_xml("Second.xml");
     foreach (string library1 in needed_elements("library", XML1))
     {
 #>
 using <#= library1#>;
 <#
-    } 
-    foreach (string library2 in needed_elements("library", XML2))
-    {
-#>
-using <#= library2#>;
-<#
     }
-    string name = needed_element("namespace", XML2);
+    foreach (string second_file in needed_elements("secondfile", XML1))
+    {
+        List<List<string>> XML2 = get_xml(second_file);
+        string name = needed_element("namespace", XML2);
 #>
+
 namespace <#= name#>
 {
 <#
-    string access = needed_element("access", XML2);
-    string classname = needed_element("classname", XML2);
+        string access = needed_element("access", XML2);
+        string classname = needed_element("classname", XML2);
 #>
     <#= access#> class <#= classname#>
     {
 <#
-    foreach (string litera in needed_elements("litera", XML2))
-    {
-        foreach (string script in needed_elements("script", XML1))
+        foreach (string litera in needed_elements("litera", XML2))
         {
-            string newscript = "";
-            if (script.Contains("???x???"))
+            foreach (string script in needed_elements("script", XML1))
             {
-                newscript = script.Replace("???x???", litera);
-            }
-            else
-            {
-                newscript = "// " + script;
-            }
+                string newscript = "";
+                if (script.Contains("???x???"))
+                {
+                    newscript = script.Replace("???x???", litera);
+                }
+                else
+                {
+                    newscript = "// " + script;
+                }
 #>
           <#= newscript#>
 <#        
-        }
+            }
 #>
 
 <#
-    }
+        }
 #>
     }
 }
+<#
+    }
+#>
 <#+
     static List<List<string>> get_xml(string title)
     {

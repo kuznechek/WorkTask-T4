@@ -1,18 +1,35 @@
-﻿  
+﻿
 using System;
 using System.IO;
-namespace my.cool.name
+
+namespace first.cool.name
 {
-    internal class MyCoolClass
+    internal class firstCoolClass
     {
-          double one;
-          // { get };
+        double one;
+        // { get };
 
-          double two;
-          // { get };
+        double two;
+        // { get };
 
-          double three;
-          // { get };
+        double three;
+        // { get };
+
+    }
+}
+
+namespace second.cool.name
+{
+    partial class secondCoolClass
+    {
+        double one;
+        // { get };
+
+        double two;
+        // { get };
+
+        double three;
+        // { get };
 
     }
 }
