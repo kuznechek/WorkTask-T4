@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <file>
 <element tag="namespace">second.cool.name</element>
-<element tag="classname">secondCoolClass</element>
+<element tag="classname">SecondCoolClass</element>
 <element tag="access">partial</element>  
-<element tag="litera">one</element>
-<element tag="litera">two</element>
-<element tag="litera">three</element>
+<element tag="litera" id="1">four</element>
+<element tag="litera" id="2">five</element>
 </file>

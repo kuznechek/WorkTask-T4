@@ -1,5 +1,5 @@
 ﻿<#@ template language="C#v3.5" debug="True" #>
-<#@ output extension="cs" #>  
+<#@ output extension="cs" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Xml" #>
 <#@ import namespace="System.Xml" #>
@@ -30,23 +30,25 @@ namespace <#= name#>
 <#
         foreach (string litera in needed_elements("litera", XML2))
         {
-            foreach (string script in needed_elements("script", XML1))
+            string script = needed_element("script", XML1);
+            string[] script_strings = script.Split('\n');
+            foreach (string script_string in script_strings)
             {
-                string newscript = "";
-                if (script.Contains("???x???"))
+                string new_script_string = "";
+                if (script_string.Contains("???x???"))
                 {
-                    newscript = script.Replace("???x???", litera);
+                    string new_script = script_string.Replace("???x???", litera);
+                    new_script_string = new_script.Remove(new_script.Length - 1);
                 }
                 else
                 {
-                    newscript = "// " + script;
+                    new_script_string = "// " + script_string + "\n";
                 }
 #>
-          <#= newscript#>
+        <#= new_script_string#>
 <#        
             }
 #>
-
 <#
         }
 #>
@@ -80,7 +82,7 @@ namespace <#= name#>
         }
         return result;
     }
-
+     
     static string needed_element(string key, List<List<string>> nodes)
     {
         string result = "";
