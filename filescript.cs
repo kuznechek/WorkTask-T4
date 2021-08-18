@@ -5,8 +5,8 @@ namespace first.cool.name
 {
     internal class FirstCoolClass
     {
-        string one;
-        // { set };
+        double one;
+        // { get };
 
         string two;
         // { set };
@@ -21,8 +21,8 @@ namespace second.cool.name
 {
     partial class SecondCoolClass
     {
-        string four;
-        // { set };
+        double four;
+        // { get };
 
         string five;
         // { set };
